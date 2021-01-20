@@ -3,6 +3,8 @@ from pynput.mouse import Controller, Button
 import keyboard
 from time import sleep
 
+path = __file__
+path = path.replace('classes joiner(public).py', '') + "classes joiner.txt"
 
 def join(subject):
     subject = str(subject)
@@ -46,7 +48,7 @@ def make_schedule(classinfo):
             #schedule.every().saturday.at(cinfo[1]).do(join, cinfo[2])
 
 
-info = open("classes joiner.txt", 'r+', encoding='ascii')
+info = open(path, 'r+', encoding='ascii')
 info = info.readlines()
 infostr = ""
 for p in range(len(info)):
