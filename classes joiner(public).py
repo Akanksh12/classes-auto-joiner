@@ -3,6 +3,7 @@ from pynput.mouse import Controller, Button
 import keyboard
 from time import sleep
 from pyautogui import alert
+import webbrowser
 
 path = __file__
 path = path.replace('classes joiner(public).py', '') + "classes joiner.txt"
