@@ -1,3 +1,4 @@
 keyboard
 schedule
 pynput
+pyautogui
