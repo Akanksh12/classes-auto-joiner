@@ -1,36 +1,48 @@
 import schedule
-from pynput.mouse import Controller, Button
 import keyboard
 from time import sleep
-from pyautogui import alert
+import pyautogui
 import webbrowser
 
 path = __file__
+return_to_home_screen_file = path.replace(
+    'classes joiner(public).py', '') + "return_to_home_screen.png"
 path = path.replace('classes joiner(public).py', '') + "classes joiner.txt"
+print(path)
+
 
 def join(subject):
     subject = str(subject)
     print("joined", subject)
-    webbrowser.open(subject)
-    sleep(10)
-    mouse.position = (430, 272)
-    mouse.press(button.left)
-    mouse.release(button.left)
-    sleep(0.1)
-    keyboard.press('ctrl')
-    sleep(0.1)
-    keyboard.press('shift')
-    sleep(0.1)
-    keyboard.press('tab')
-    sleep(0.1)
-    keyboard.release('tab')
-    sleep(0.1)
-    keyboard.release('shift')
-    sleep(0.1)
-    keyboard.release('ctrl')
-    sleep(0.1)
-    keyboard.press_and_release('ctrl + w')
-    sleep(0.1)
+    if 'meet.google.com' in subject:
+        webbrowser.open(subject)
+        sleep(10)
+        pyautogui.click(460, 340)
+        sleep(0.1)
+        keyboard.press('ctrl')
+        sleep(0.1)
+        keyboard.press('shift')
+        sleep(0.1)
+        keyboard.press('tab')
+        sleep(0.1)
+        keyboard.release('tab')
+        sleep(0.1)
+        keyboard.release('shift')
+        sleep(0.1)
+        keyboard.release('ctrl')
+        sleep(0.1)
+        keyboard.press_and_release('ctrl + w')
+        sleep(0.1)
+        while True:
+            try:
+                if pyautogui.pixel(0, 90)[0] == 255 and pyautogui.pixel(918, 561)[0] == 39:
+                    pyautogui.press('ctrl+r')
+                else:
+                    break
+            except:
+                pass
+    else:
+        webbrowser.open(subject)
 
 
 def make_schedule(classinfo):
@@ -46,8 +58,8 @@ def make_schedule(classinfo):
             schedule.every().thursday.at(cinfo[1]).do(join, cinfo[2])
         if cinfo[0] == "friday":
             schedule.every().friday.at(cinfo[1]).do(join, cinfo[2])
-        # if cinfo[0] == "saturday":
-            #schedule.every().saturday.at(cinfo[1]).do(join, cinfo[2])
+        if cinfo[0] == "saturday":
+            schedule.every().saturday.at(cinfo[1]).do(join, cinfo[2])
 
 
 try:
@@ -65,7 +77,7 @@ print('loaded info')
 make_schedule(info)
 print('schedule loaded')
 print("Waiting for classes to start...")
-alert("Waiting for classes to start...")
+pyautogui.alert("Waiting for classes to start...")
 
 while True:
     schedule.run_pending()
