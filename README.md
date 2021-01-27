@@ -5,7 +5,7 @@ Note: this program uses the 24 hour clock, times like 9:00 am should be written 
 
 # pip command(open in the same folder as other stuff): pip install -r requirements.txt
 
-# executable link(no need of python installed): https://drive.google.com/file/d/1v9FtCMvhZ3yZ-Y5EDAY1YQT77z4e-Fvi/view?usp=sharing
+# executable link(no need of python installed): https://drive.google.com/file/d/1oHXXHl6FmY_c3DH2J3jz519xskZe20Tt/view?usp=sharing
 Note: classes joiner.txt has to be there with your own info, after clicking on download please click on download again. When using the executable, please wait for the program to load as it uses alot of dependencies
 
 # happy online classes! :D
