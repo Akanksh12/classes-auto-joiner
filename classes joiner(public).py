@@ -3,6 +3,7 @@ import keyboard
 from time import sleep
 import pyautogui
 import webbrowser
+from datetime import datetime
 
 path = __file__
 return_to_home_screen_file = path.replace(
@@ -13,31 +14,17 @@ print(path)
 
 def join(subject):
     subject = str(subject)
-    print("joined", subject)
+    now = datetime.now().time()
+    print("joined", subject, "at", now)
     if 'meet.google.com' in subject:
         webbrowser.open(subject)
-        sleep(10)
-        pyautogui.click(460, 340)
-        sleep(0.1)
-        keyboard.press('ctrl')
-        sleep(0.1)
-        keyboard.press('shift')
-        sleep(0.1)
-        keyboard.press('tab')
-        sleep(0.1)
-        keyboard.release('tab')
-        sleep(0.1)
-        keyboard.release('shift')
-        sleep(0.1)
-        keyboard.release('ctrl')
-        sleep(0.1)
-        keyboard.press_and_release('ctrl + w')
-        sleep(0.1)
+        sleep(7)
         while True:
             try:
-                if pyautogui.pixel(0, 90)[0] == 255 and pyautogui.pixel(918, 561)[0] == 39:
-                    pyautogui.press('ctrl+r')
-                else:
+                if pyautogui.pixel(0, 90)[0] == 255:
+                    keyboard.press_and_release('ctrl+r')
+                    sleep(7)
+                elif pyautogui.pixel(0, 90)[0] == 17:
                     break
             except:
                 pass
@@ -96,6 +83,7 @@ print("""
 ..:::::..::..::::..::..:::::..::..::::..::..::::..:::......:::..:::::..::
 """)
 pyautogui.alert("Waiting for classes to start...")
+join("https://meet.google.com/lookup/hsqc3scqqw?authuser=1&hs=179")
 
 while True:
     schedule.run_pending()
