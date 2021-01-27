@@ -83,7 +83,6 @@ print("""
 ..:::::..::..::::..::..:::::..::..::::..::..::::..:::......:::..:::::..::
 """)
 pyautogui.alert("Waiting for classes to start...")
-join("https://meet.google.com/lookup/hsqc3scqqw?authuser=1&hs=179")
 
 while True:
     schedule.run_pending()
