@@ -5,11 +5,10 @@ import pyautogui
 import webbrowser
 from datetime import datetime
 
-path = __file__
-return_to_home_screen_file = path.replace(
-    'classes joiner(public).py', '') + "return_to_home_screen.png"
-path = path.replace('classes joiner(public).py', '') + "classes joiner.txt"
-print(path)
+
+path = __file__.replace('classes_joiner.py',
+                        'classes joiner.txt')
+print("using data from", path)
 
 
 def join(subject):
@@ -32,6 +31,27 @@ def join(subject):
         webbrowser.open(subject)
 
 
+def join_once(subject):
+    subject = str(subject)
+    now = datetime.now().time()
+    print("joined", subject, "at", now)
+    if 'meet.google.com' in subject:
+        webbrowser.open(subject)
+        sleep(7)
+        while True:
+            try:
+                if pyautogui.pixel(0, 90)[0] == 255:
+                    keyboard.press_and_release('ctrl+r')
+                    sleep(7)
+                elif pyautogui.pixel(0, 90)[0] == 17:
+                    break
+            except:
+                pass
+    else:
+        webbrowser.open(subject)
+    return schedule.CancelJob
+
+
 def make_schedule(classinfo):
     for i in range(len(classinfo)):
         cinfo = classinfo[i].split(' ')
@@ -47,11 +67,16 @@ def make_schedule(classinfo):
             schedule.every().friday.at(cinfo[1]).do(join, cinfo[2])
         if cinfo[0] == "saturday":
             schedule.every().saturday.at(cinfo[1]).do(join, cinfo[2])
+        if cinfo[0] == 'everyday':
+            schedule.every().day.at(cinfo[1]).do(join, cinfo[2])
+        if cinfo[0] == 'once':
+            schedule.every().day.at(cinfo[1]).do(join_once, cinfo[2])
 
 
+print(path)
 try:
     info = open(path, 'r+', encoding='ascii')
-except FileNotFoundError:
+except:
     print('ensure "classes joiner.txt" is in the same directory as this python file and run again!')
 info = info.readlines()
 infostr = ""
@@ -82,7 +107,8 @@ print("""
  ##:::: ##: ##::. ##: ##:::: ##: ##::. ##: ##::. ##:. ######:: ##:::: ##:
 ..:::::..::..::::..::..:::::..::..::::..::..::::..:::......:::..:::::..::
 """)
-pyautogui.alert("Waiting for classes to start...")
+
+pyautogui.alert('Waiting for classes to start')
 
 while True:
     schedule.run_pending()
