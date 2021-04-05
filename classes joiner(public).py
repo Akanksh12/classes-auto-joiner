@@ -6,7 +6,7 @@ import webbrowser
 from datetime import datetime
 
 
-path = __file__.replace('classes_joiner.py',
+path = __file__.replace('classes joiner(public).py',
                         'classes joiner.txt')
 print("using data from", path)
 
